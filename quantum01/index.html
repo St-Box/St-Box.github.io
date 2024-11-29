@@ -133,9 +133,86 @@
                 font-size: 1.8em;
             }
         }
+ .history-panel {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(13, 12, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .history-panel.active {
+            left: 0;
+        }
+
+        .history-entry {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        .history-entry:hover {
+            background: rgba(123, 47, 166, 0.2);
+        }
+
+        .control-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: rgba(88, 43, 168, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(123, 47, 166, 0.5);
+        }
+
+        .current-path {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(88, 43, 168, 0.3);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            z-index: 1001;
+        }
     </style>
 </head>
 <body>
+    <div class="history-panel" id="historyPanel">
+        <h3 style="color: #fff; margin-bottom: 20px;">故事记录</h3>
+        <div id="historyContent"></div>
+    </div>
+
+    <div class="control-buttons">
+        <button class="control-btn" onclick="resetStory()">重置故事</button>
+        <button class="control-btn" id="toggleHistory">查看历史</button>
+    </div>
+
+    <div class="current-path" id="currentPath">当前路径: 初始</div>
+        <!-- 保留之前的其他 HTML 结构 -->
+
     <div class="stars" id="stars"></div>
     <div class="quantum-container">
         <h1 class="title">量子哈姆雷特</h1>
@@ -260,49 +337,106 @@
         // 可以继续添加更多结局...
     };
 
-    function makeChoice(choice) {
-        const storyText = document.getElementById('storyText');
-        const choicesContainer = document.getElementById('choices');
-        const state = document.getElementById('currentState');
-        
-        let currentContent = storyContent[choice];
-        
-        // 检查是否是结局
-        if (endings[choice]) {
-            currentContent = endings[choice];
-            storyText.innerHTML = currentContent.text;
-            choicesContainer.innerHTML = '<button class="choice-btn" onclick="location.reload()">重新开始</button>';
-            state.textContent = "最终态|Ψ⟩";
-            return;
+    // 添加历史记录管理
+        let storyHistory = [];
+        let currentPath = ['初始'];
+
+        function updateHistory(choice, text) {
+            const historyEntry = {
+                choice: choice,
+                text: text,
+                timestamp: new Date().toLocaleTimeString()
+            };
+            storyHistory.push(historyEntry);
+            updateHistoryPanel();
+            updateCurrentPath(choice);
         }
 
-        if (currentContent) {
-            storyText.innerHTML = currentContent.text;
-            choicesContainer.innerHTML = '';
-            currentContent.choices.forEach(c => {
-                const btn = document.createElement('button');
-                btn.className = 'choice-btn';
-                btn.textContent = c.text;
-                btn.onclick = () => makeChoice(c.next);
-                choicesContainer.appendChild(btn);
-            });
+        function updateHistoryPanel() {
+            const historyContent = document.getElementById('historyContent');
+            historyContent.innerHTML = storyHistory.map((entry, index) => `
+                <div class="history-entry">
+                    <div>[${entry.timestamp}] 选择: ${entry.choice}</div>
+                    <div>${entry.text.substring(0, 50)}...</div>
+                </div>
+            `).join('');
+        }
+
+        function updateCurrentPath(choice) {
+            currentPath.push(choice);
+            document.getElementById('currentPath').textContent = '当前路径: ' + currentPath.join(' → ');
+        }
+
+        function resetStory() {
+            if (confirm('确定要重置故事吗？所有进度将丢失。')) {
+                storyHistory = [];
+                currentPath = ['初始'];
+                updateHistoryPanel();
+                updateCurrentPath('初始');
+                location.reload();
+            }
+        }
+
+        // 修改 makeChoice 函数
+        function makeChoice(choice) {
+            const storyText = document.getElementById('storyText');
+            const choicesContainer = document.getElementById('choices');
+            const state = document.getElementById('currentState');
             
-            currentState = `状态|${choice}⟩`;
-            state.textContent = currentState;
+            let currentContent = storyContent[choice];
+            
+            // 检查是否是结局
+            if (endings[choice]) {
+                currentContent = endings[choice];
+                storyText.innerHTML = currentContent.text;
+                choicesContainer.innerHTML = '<button class="choice-btn" onclick="resetStory()">重新开始</button>';
+                state.textContent = "最终态|Ψ⟩";
+                updateHistory(choice, currentContent.text);
+                return;
+            }
 
-            // 添加过渡动画
-            storyText.style.opacity = 0;
-            setTimeout(() => {
-                storyText.style.opacity = 1;
-            }, 100);
+            if (currentContent) {
+                storyText.innerHTML = currentContent.text;
+                choicesContainer.innerHTML = '';
+                currentContent.choices.forEach(c => {
+                    const btn = document.createElement('button');
+                    btn.className = 'choice-btn';
+                    btn.textContent = c.text;
+                    btn.onclick = () => makeChoice(c.next);
+                    choicesContainer.appendChild(btn);
+                });
+                
+                currentState = `状态|${choice}⟩`;
+                state.textContent = currentState;
+                
+                updateHistory(choice, currentContent.text);
+
+                // 添加过渡动画
+                storyText.style.opacity = 0;
+                setTimeout(() => {
+                    storyText.style.opacity = 1;
+                }, 100);
+            }
         }
-    }
 
-    // 初始化
-    createStars();
+        // 历史面板切换
+        document.getElementById('toggleHistory').addEventListener('click', function() {
+            const panel = document.getElementById('historyPanel');
+            panel.classList.toggle('active');
+        });
 
         // 初始化
         createStars();
+
+        // 添加键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'h' || e.key === 'H') {
+                document.getElementById('toggleHistory').click();
+            }
+            if (e.key === 'Escape') {
+                document.getElementById('historyPanel').classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
