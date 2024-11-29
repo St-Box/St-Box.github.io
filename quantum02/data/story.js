@@ -1,5 +1,5 @@
 const STORY_CONTENT = {
-    'A': {
+    'start': {
         text: "深夜的城堡中,你遇到了父亲的身影。但这个形象似乎同时存在又不存在,像是某种量子态的投影...",
         choices: [
             { text: "尝试与量子态沟通", next: 'B' },
