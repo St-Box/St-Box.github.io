@@ -175,45 +175,131 @@
 
         // 故事状态管理
         let currentState = '初始态';
-        const storyContent = {
-            'A': {
-                text: "你选择相信幽灵。当你独自面对父亲的幽灵时，他揭示了一个骇人的真相：他是被自己的兄弟谋杀的。这个启示让你的世界在经典和量子态之间震荡...",
-                choices: [
-                    { text: "保持疏远，专注复仇", next: 'A1' },
-                    { text: "告知真相，寻求帮助", next: 'A2' }
-                ]
-            },
-            // 可以继续添加更多状态
-        };
-
-        function makeChoice(choice) {
-            const storyText = document.getElementById('storyText');
-            const choicesContainer = document.getElementById('choices');
-            const state = document.getElementById('currentState');
-            
-            // 更新故事内容和选项
-            if (storyContent[choice]) {
-                storyText.innerHTML = storyContent[choice].text;
-                choicesContainer.innerHTML = '';
-                storyContent[choice].choices.forEach(c => {
-                    const btn = document.createElement('button');
-                    btn.className = 'choice-btn';
-                    btn.textContent = c.text;
-                    btn.onclick = () => makeChoice(c.next);
-                    choicesContainer.appendChild(btn);
-                });
-                
-                // 更新量子状态
-                currentState = `状态|${choice}⟩`;
-                state.textContent = currentState;
-
-                // 添加过渡动画
-                storyText.style.opacity = 0;
-                setTimeout(() => {
-                    storyText.style.opacity = 1;
-                }, 100);
-            }
+        // 扩展的故事内容
+    const storyContent = {
+        'A': {
+            text: "你选择相信幽灵。当你独自面对父亲的幽灵时，他揭示了一个骇人的真相：他是被自己的兄弟谋杀的。克劳迪斯在你父亲熟睡时，将毒药倒入他的耳中。这个启示让你的世界在经典和量子态之间震荡...",
+            choices: [
+                { text: "保持疏远，专注复仇", next: 'A1' },
+                { text: "告知真相，寻求帮助", next: 'A2' }
+            ]
+        },
+        'A1': {
+            text: "你决定独自承担复仇的重任。为了不让任何人卷入危险，你开始疏远所有人，包括深爱的奥菲利娅。但你发现，在装疯卖傻的过程中，现实似乎开始模糊，真与假的界限变得不再清晰...",
+            choices: [
+                { text: "继续伪装，策划剧场验证", next: 'A1_1' },
+                { text: "寻找确凿证据", next: 'A1_2' }
+            ]
+        },
+        'A2': {
+            text: "你选择向奥菲利娅吐露真相。她震惊之余，提出了一个大胆的想法：利用量子观测原理，通过特殊的仪式让克劳迪斯在众人面前暴露真相。但这个计划有着不可预知的风险...",
+            choices: [
+                { text: "接受建议，准备量子仪式", next: 'A2_1' },
+                { text: "婉拒建议，选择传统方式", next: 'A2_2' }
+            ]
+        },
+        'B': {
+            text: "你怀疑眼前的幽灵可能是量子态的投影。作为一个理性的思考者，你意识到在量子力学的世界里，观测会影响结果。也许这个幽灵同时存在于多个平行宇宙中，而你的选择将决定哪个现实会坍缩成真...",
+            choices: [
+                { text: "进行量子观测实验", next: 'B1' },
+                { text: "探索平行时间线", next: 'B2' }
+            ]
+        },
+        'B1': {
+            text: "你决定设计一个精妙的量子观测实验。通过在城堡的不同位置放置特殊的装置，你试图捕捉和测量幽灵的量子特性。但实验过程中，你发现自己似乎也进入了量子叠加状态...",
+            choices: [
+                { text: "继续深入实验", next: 'B1_1' },
+                { text: "尝试退出叠加态", next: 'B1_2' }
+            ]
+        },
+        'B2': {
+            text: "你开始探索多个时间线的可能性。在某个平行宇宙中，你发现父亲可能还活着；在另一个宇宙里，克劳迪斯可能是个好国王。这些认知开始动摇你的复仇决心...",
+            choices: [
+                { text: "尝试合并时间线", next: 'B2_1' },
+                { text: "选择最优宇宙", next: 'B2_2' }
+            ]
+        },
+        'C': {
+            text: "你认为这是克劳迪斯精心设计的阴谋，利用民间对幽灵的恐惧来测试你的反应。但随着调查深入，你发现事情远比表面看起来要复杂得多...",
+            choices: [
+                { text: "暗中调查克劳迪斯", next: 'C1' },
+                { text: "设计反向陷阱", next: 'C2' }
+            ]
+        },
+        'C1': {
+            text: "你开始秘密跟踪克劳迪斯的一举一动。在一个深夜，你无意中发现他在城堡的密室中进行某种神秘仪式，似乎在操控量子态的幽灵投影...",
+            choices: [
+                { text: "破坏仪式", next: 'C1_1' },
+                { text: "继续观察", next: 'C1_2' }
+            ]
+        },
+        'C2': {
+            text: "你决定设计一个陷阱，让克劳迪斯自己落入圈套。你开始表演出一副被幽灵困扰的样子，同时暗中准备了一个精巧的计划...",
+            choices: [
+                { text: "启动剧场计划", next: 'C2_1' },
+                { text: "布置量子陷阱", next: 'C2_2' }
+            ]
         }
+        // 可以继续添加更多分支...
+    };
+
+    // 添加结局内容
+    const endings = {
+        'A1_1': {
+            text: "经典的复仇结局：通过剧场表演，你成功让克劳迪斯暴露了罪行，但最终所有人都付出了惨重的代价...",
+            final: true
+        },
+        'B1_1': {
+            text: "量子超越结局：你成功解开了量子纠缠的谜题，发现整个世界都是更高维度的投影，包括你自己...",
+            final: true
+        },
+        'C2_1': {
+            text: "平行宇宙融合：你的行动导致多个时间线发生融合，创造出了一个全新的现实，所有人都获得了第二次机会...",
+            final: true
+        }
+        // 可以继续添加更多结局...
+    };
+
+    function makeChoice(choice) {
+        const storyText = document.getElementById('storyText');
+        const choicesContainer = document.getElementById('choices');
+        const state = document.getElementById('currentState');
+        
+        let currentContent = storyContent[choice];
+        
+        // 检查是否是结局
+        if (endings[choice]) {
+            currentContent = endings[choice];
+            storyText.innerHTML = currentContent.text;
+            choicesContainer.innerHTML = '<button class="choice-btn" onclick="location.reload()">重新开始</button>';
+            state.textContent = "最终态|Ψ⟩";
+            return;
+        }
+
+        if (currentContent) {
+            storyText.innerHTML = currentContent.text;
+            choicesContainer.innerHTML = '';
+            currentContent.choices.forEach(c => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.textContent = c.text;
+                btn.onclick = () => makeChoice(c.next);
+                choicesContainer.appendChild(btn);
+            });
+            
+            currentState = `状态|${choice}⟩`;
+            state.textContent = currentState;
+
+            // 添加过渡动画
+            storyText.style.opacity = 0;
+            setTimeout(() => {
+                storyText.style.opacity = 1;
+            }, 100);
+        }
+    }
+
+    // 初始化
+    createStars();
 
         // 初始化
         createStars();
