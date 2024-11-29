@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量子哈姆雷特</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #0a0a2e, #1a1a3a);
+            color: #fff;
+            font-family: 'Microsoft YaHei', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .quantum-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .story-container {
+            background: rgba(13, 12, 40, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quantum-state {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(88, 43, 168, 0.3);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+
+        .choice-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .choice-btn {
+            background: linear-gradient(45deg, #4a1b8c, #7b2fa6);
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 47, 166, 0.4);
+        }
+
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .choice-btn:hover::before {
+            left: 100%;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(123, 47, 166, 0.8);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .story-text {
+            line-height: 1.8;
+            font-size: 1.1em;
+            text-shadow: 0 0 5px rgba(123, 47, 166, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .quantum-container {
+                padding: 10px;
+            }
+            .story-container {
+                padding: 20px;
+            }
+            .title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="quantum-container">
+        <h1 class="title">量子哈姆雷特</h1>
+        <div class="quantum-state">
+            量子状态: <span id="currentState">初始态|ψ⟩</span>
+        </div>
+        <div class="story-container">
+            <div class="story-text" id="storyText">
+                在丹麦埃尔西诺城堡的一个寒冷夜晚，守卫们再次看见了已故国王的幽灵。这个消息很快传到了王子哈姆雷特的耳中。在量子叠加的迷雾中，你将如何面对这个可能改变一切的时刻？
+            </div>
+            <div class="choice-container" id="choices">
+                <button class="choice-btn" onclick="makeChoice('A')">相信这是父亲的幽灵</button>
+                <button class="choice-btn" onclick="makeChoice('B')">怀疑这是量子幻象</button>
+                <button class="choice-btn" onclick="makeChoice('C')">认为这是克劳迪斯的阴谋</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 创建星空背景
+        function createStars() {
+            const stars = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.backgroundColor = '#fff';
+                star.style.borderRadius = '50%';
+                star.style.opacity = Math.random();
+                star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
+                stars.appendChild(star);
+            }
+        }
+
+        // 故事状态管理
+        let currentState = '初始态';
+        const storyContent = {
+            'A': {
+                text: "你选择相信幽灵。当你独自面对父亲的幽灵时，他揭示了一个骇人的真相：他是被自己的兄弟谋杀的。这个启示让你的世界在经典和量子态之间震荡...",
+                choices: [
+                    { text: "保持疏远，专注复仇", next: 'A1' },
+                    { text: "告知真相，寻求帮助", next: 'A2' }
+                ]
+            },
+            // 可以继续添加更多状态
+        };
+
+        function makeChoice(choice) {
+            const storyText = document.getElementById('storyText');
+            const choicesContainer = document.getElementById('choices');
+            const state = document.getElementById('currentState');
+            
+            // 更新故事内容和选项
+            if (storyContent[choice]) {
+                storyText.innerHTML = storyContent[choice].text;
+                choicesContainer.innerHTML = '';
+                storyContent[choice].choices.forEach(c => {
+                    const btn = document.createElement('button');
+                    btn.className = 'choice-btn';
+                    btn.textContent = c.text;
+                    btn.onclick = () => makeChoice(c.next);
+                    choicesContainer.appendChild(btn);
+                });
+                
+                // 更新量子状态
+                currentState = `状态|${choice}⟩`;
+                state.textContent = currentState;
+
+                // 添加过渡动画
+                storyText.style.opacity = 0;
+                setTimeout(() => {
+                    storyText.style.opacity = 1;
+                }, 100);
+            }
+        }
+
+        // 初始化
+        createStars();
+    </script>
+</body>
+</html>
