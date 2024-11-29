@@ -1,0 +1,137 @@
+/* 量子动画相关样式 */
+/* 量子动画基础样式 */
+.quantum-animation {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    background: rgba(88, 43, 168, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px auto;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    filter: blur(1px);
+    transition: all 0.3s ease;
+}
+
+/* 稳定态动画 */
+@keyframes orbit {
+    0% { 
+        transform: rotate(0deg) translateX(30px) rotate(0deg); 
+    }
+    100% { 
+        transform: rotate(360deg) translateX(30px) rotate(-360deg); 
+    }
+}
+
+/* 叠加态动画 */
+@keyframes quantum-jump {
+    0%, 100% { 
+        transform: translate(0, 0); 
+        opacity: 1; 
+    }
+    25% { 
+        transform: translate(20px, -20px); 
+        opacity: 0.7; 
+    }
+    50% { 
+        transform: translate(-20px, 20px); 
+        opacity: 0.5; 
+    }
+    75% { 
+        transform: translate(-20px, -20px); 
+        opacity: 0.7; 
+    }
+}
+
+/* 波纹动画 */
+@keyframes ripple-effect {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+    }
+    100% {
+        width: 200px;
+        height: 200px;
+        opacity: 0;
+    }
+}
+
+.ripple {
+    position: absolute;
+    border: 2px solid rgba(123, 47, 166, 0.5);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 状态类样式 */
+.stable-state .particle {
+    animation: orbit 3s linear infinite;
+}
+
+.superposition-state .particle {
+    animation: quantum-jump 2s ease-in-out infinite;
+}
+
+.collapse-state .particle {
+    animation: none;
+    transition: all 0.5s ease-in-out;
+}
+
+
+
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slide-in {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+
+
+/* 标题动画 */
+.title {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 选项按钮动画 */
+.choice-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.choice-btn:hover::before {
+    left: 100%;
+}

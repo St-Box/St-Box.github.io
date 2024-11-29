@@ -3,26 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人网站</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>量子哈姆雷特</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">首页</a></li>
-                <li><a href="/stories">我的故事</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <h1>欢迎来到我的网站</h1>
-        <p>这是我的个人空间，在这里我会分享我的想法和经历。</p>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 St-Box</p>
-    </footer>
+    <div id="stars" class="stars"></div>
+
+    <div class="history-panel" id="historyPanel">
+        <h3>故事记录</h3>
+        <div id="historyContent"></div>
+    </div>
+
+    <div class="control-buttons">
+        <button class="control-btn" id="resetBtn">重置故事</button>
+        <button class="control-btn" id="toggleHistory">查看历史</button>
+    </div>
+
+    <div class="current-path" id="currentPath">当前路径: 初始</div>
+
+    <div class="quantum-container">
+        <h1 class="title">量子哈姆雷特</h1>
+        
+        <div class="quantum-state">
+            <span id="currentState">量子态：|ψ⟩</span>
+            <div id="quantumAnimation"></div>
+            <!-- 量子动画将在此处生成 -->
+        </div>
+
+        <div class="story-container">
+            <div class="story-text" id="storyText">
+                <!-- 故事内容将在此处动态生成 -->
+            </div>
+            <div class="choice-container" id="choices">
+                <!-- 选项将在此处动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 按照依赖顺序加载脚本 -->
+    <script src="data/story.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/QuantumAnimation.js"></script>
+    <script src="js/HistoryManager.js"></script>
+    <script src="js/StoryManager.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

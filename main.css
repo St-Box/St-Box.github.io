@@ -1,0 +1,175 @@
+/* 基础样式设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(45deg, #0a0a2e, #1a1a3a);
+    color: #fff;
+    font-family: 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 容器样式 */
+.quantum-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* 标题样式 */
+.title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(123, 47, 166, 0.8);
+}
+
+/* 故事容器样式 */
+.story-container {
+    background: rgba(13, 12, 40, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+/* 量子状态指示器 */
+.quantum-state {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(88, 43, 168, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 选项容器 */
+.choice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* 选项按钮 */
+.choice-btn {
+    background: linear-gradient(45deg, #4a1b8c, #7b2fa6);
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(123, 47, 166, 0.4);
+}
+
+/* 故事文本 */
+.story-text {
+    line-height: 1.8;
+    font-size: 1.1em;
+    text-shadow: 0 0 5px rgba(123, 47, 166, 0.3);
+}
+
+/* 历史面板 */
+.history-panel {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: rgba(13, 12, 40, 0.95);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.history-panel.active {
+    left: 0;
+}
+
+/* 控制按钮 */
+.control-buttons {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    background: rgba(88, 43, 168, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: rgba(123, 47, 166, 0.5);
+}
+
+/* 当前路径显示 */
+.current-path {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(88, 43, 168, 0.3);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    z-index: 1001;
+}
+
+/* 图片相关样式 */
+.story-image-container {
+    margin: 20px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.story-image-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.story-image {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(123, 47, 166, 0.3);
+}
+
+.image-caption {
+    text-align: center;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 8px;
+}
