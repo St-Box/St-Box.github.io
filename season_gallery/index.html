@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Art Gallery</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <canvas id="seasonCanvas"></canvas>
+    <div class="controls" id="controls">
+        <div class="control-group">
+            <label>Season (0-4)</label>
+            <input type="range" id="seasonSlider" min="0" max="4" step="0.01" value="0">
+        </div>
+        <div class="control-group">
+            <label>Time (0-24)</label>
+            <input type="range" id="timeSlider" min="0" max="24" step="0.1" value="12">
+        </div>
+        <button class="toggle-btn" id="autoToggle">Auto</button>
+    </div>
+    <div class="info">Click to create ripples • Move mouse to create wind</div>
+
+    <!-- Utils -->
+    <script src="js/utils/ObjectPool.js"></script>
+    <script src="js/utils/ColorUtils.js"></script>
+
+    <!-- Core -->
+    <script src="js/core/Wind.js"></script>
+    <script src="js/core/TimeSystem.js"></script>
+
+    <!-- Elements -->
+    <script src="js/elements/NatureElement.js"></script>
+    <script src="js/elements/Petal.js"></script>
+    <script src="js/elements/Snowflake.js"></script>
+    <script src="js/elements/Firefly.js"></script>
+    <script src="js/elements/MapleLeaf.js"></script>
+    <script src="js/elements/Star.js"></script>
+    <script src="js/elements/Ripple.js"></script>
+
+    <!-- Main -->
+    <script src="js/main.js"></script>
+</body>
+</html>
