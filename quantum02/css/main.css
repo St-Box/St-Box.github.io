@@ -48,13 +48,40 @@ body {
     top: 20px;
     right: 20px;
     background: rgba(88, 43, 168, 0.3);
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
     font-size: 0.9em;
+    width: 250px; /* 固定宽度 */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+}
+
+.state-display {
+    width: 100%;
+    text-align: center;
+}
+
+.state-label {
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95em;
+}
+
+.state-notation {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1em;
+    color: #fff;
+    word-wrap: break-word; /* 允许长公式自动换行 */
+    line-height: 1.4;
+}
+
+/* 量子动画容器的样式调整 */
+.quantum-animation {
+    width: 200px;
+    height: 100px;
+    margin-top: 5px;
 }
 
 /* 选项容器 */
@@ -172,4 +199,79 @@ body {
     font-size: 0.9em;
     color: rgba(255, 255, 255, 0.7);
     margin-top: 8px;
+}
+.story-media-container {
+    margin: 20px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.story-media-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.story-media-container.float-right {
+    float: right;
+    margin: 0 0 20px 20px;
+    width: 40%;
+}
+
+.story-media-container.float-left {
+    float: left;
+    margin: 0 20px 20px 0;
+    width: 40%;
+}
+
+.story-image,
+.story-video,
+.story-gif {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(123, 47, 166, 0.3);
+}
+
+.story-video {
+    width: 100%;
+}
+
+.story-video.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.media-caption {
+    text-align: center;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 8px;
+}
+
+/* 媒体样式变体 */
+.story-image.style-regular,
+.story-gif.style-regular {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.story-image.style-full,
+.story-gif.style-full {
+    width: 100%;
+    height: auto;
+}
+
+.story-image.style-medium,
+.story-gif.style-medium {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
 }

@@ -17,17 +17,20 @@
     </div>
 
     <div class="control-buttons">
-        <button class="control-btn" id="resetBtn">重置故事</button>
-        <button class="control-btn" id="toggleHistory">查看历史</button>
+        <button class="control-btn" id="resetBtn">Reset</button>
+        <button class="control-btn" id="toggleHistory">View History</button>
     </div>
 
-    <div class="current-path" id="currentPath">当前路径: 初始</div>
+    <div class="current-path" id="currentPath">Current Path: 初始</div>
 
     <div class="quantum-container">
-        <h1 class="title">量子哈姆雷特</h1>
+        <h1 class="title">Quantum Hamlet</h1>
         
         <div class="quantum-state">
-            <span id="currentState">量子态：|ψ⟩</span>
+            <div class="state-display">
+                <div class="state-label">Quantum State：</div>
+                <div id="currentState" class="state-notation">|Ψ₀⟩</div>
+            </div>
             <div id="quantumAnimation"></div>
             <!-- 量子动画将在此处生成 -->
         </div>

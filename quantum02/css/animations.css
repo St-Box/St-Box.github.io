@@ -112,7 +112,7 @@
 
 /* 标题动画 */
 .title {
-    animation: float 3s ease-in-out infinite;
+    animation: none;
 }
 
 /* 选项按钮动画 */

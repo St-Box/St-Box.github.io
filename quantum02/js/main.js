@@ -9,12 +9,15 @@ class App {
 
         this.story = new StoryManager();
         this.history = new HistoryManager();
+        this.currentNodeId = 'start';
         this.bindEvents();
     }
 
     init() {
         Utils.createStars();
         ImagePreloader.preloadImages(STORY_CONTENT);
+        this.story.updateStoryDisplay('start');
+        // 确保初始化时更新标题和故事显示
         this.story.updateStoryDisplay('start');
         
         // 确保量子动画被正确添加到DOM中
@@ -25,7 +28,25 @@ class App {
             console.error('Quantum animation container not found');
         }
     }
-
+    // 获取量子态表示
+    getQuantumStateNotation(nodeId, isSuperposition = false) {
+        if (isSuperposition) {
+            // 在叠加态时，显示当前状态和可能的下一个状态的叠加
+            const currentContent = STORY_CONTENT[nodeId];
+            if (currentContent && currentContent.choices) {
+                const nextStates = currentContent.choices.map(choice => choice.next);
+                const superpositionTerms = nextStates.map(state => `|Ψ${state}⟩`).join(' + ');
+                return `|Ψ⟩ = ${superpositionTerms}`;
+            }
+            return `|Ψ⟩ = Σ|Ψᵢ⟩`;
+        } else {
+            // 在稳定态时，显示当前状态
+            if (nodeId === 'start') {
+                return '|Ψ₀⟩';
+            }
+            return `|Ψ${nodeId}⟩`;
+        }
+    }
     bindEvents() {
         // 绑定故事事件
         this.story.on('choiceMade', ({ node }) => {
@@ -48,20 +69,29 @@ class App {
         document.getElementById('toggleHistory').addEventListener('click', () => {
             this.history.toggle();
         });
-
-        // 选项悬停效果
-        document.addEventListener('mouseover', (e) => {
+        
+         // 选项悬停效果
+         document.addEventListener('mouseover', (e) => {
             if (e.target.classList.contains('choice-btn')) {
                 this.quantum.setSuperpositionState();
-                document.getElementById('currentState').textContent = "量子态：|ψ⟩ = Σ|φᵢ⟩";
+                const stateNotation = this.getQuantumStateNotation(this.currentNodeId, true);
+                document.getElementById('currentState').textContent = `${stateNotation}`;
             }
         });
 
         document.addEventListener('mouseout', (e) => {
             if (e.target.classList.contains('choice-btn')) {
                 this.quantum.setStableState();
-                document.getElementById('currentState').textContent = "量子态：|ψ⟩";
+                const stateNotation = this.getQuantumStateNotation(this.currentNodeId, false);
+                document.getElementById('currentState').textContent = `${stateNotation}`;
             }
+        });
+         // 在做出选择时更新当前节点ID
+         this.story.on('choiceMade', ({ node }) => {
+            this.currentNodeId = node;
+            this.quantum.setCollapseState();
+            const stateNotation = this.getQuantumStateNotation(node, false);
+            document.getElementById('currentState').textContent = `${stateNotation}`;
         });
 
         // 键盘快捷键
@@ -72,6 +102,11 @@ class App {
             if (e.key === 'Escape') {
                 this.historyPanel.classList.remove('active');
             }
+        });
+
+        // 添加标题更新的调试
+        this.story.on('choiceMade', ({ node }) => {
+            console.log('Choice made, updating to node:', node);
         });
     }
 

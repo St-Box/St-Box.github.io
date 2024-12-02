@@ -1,6 +1,34 @@
+const MEDIA_PATHS = {
+    images: 'data/images/',
+    videos: 'data/videos/',
+    gifs: 'data/gifs/'
+};
+
 const STORY_CONTENT = {
     'start': {
+        title:"Quantum Hamlet",
+        text: "The story of the quantum realm has begun. The future is depended on your observation.",
+        media: {
+            type: 'image',
+            file: 'cover.jpg',
+            position: 'top',
+            style: 'full',
+            caption: ''
+        },
+        choices: [
+            { text: "开始剧本", next: 'A' }
+        ]
+    },
+
+    'A': {
         text: "深夜的城堡中,你遇到了父亲的身影。但这个形象似乎同时存在又不存在,像是某种量子态的投影...",
+        media: {
+            type:"image",
+            file:'castle.jpg',
+            position: "top",
+            style: "regular",
+            caption: "父亲幽灵显现的场景"
+        },
         choices: [
             { text: "尝试与量子态沟通", next: 'B' },
             { text: "展开科学调查", next: 'C' },
