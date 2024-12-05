@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 创建加载指示器
     const loadingIndicator = document.createElement('div');
     loadingIndicator.className = 'loading-indicator';
-    loadingIndicator.innerHTML = '<div class="spinner"></div><p>正在初始化量子世界...</p>';
+    loadingIndicator.innerHTML = '<div class="spinner"></div><p>Initializing...</p>';
     document.body.appendChild(loadingIndicator);
 
     // 初始化应用

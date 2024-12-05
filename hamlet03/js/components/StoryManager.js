@@ -285,7 +285,7 @@ class StoryManager extends EventEmitter {
             <div class="modal-overlay" id="choicesModal">
                 <div class="choices-modal">
                     <div class="modal-image">
-                        <img src="data/images/quantum-choice.jpg" alt="">
+                        <img src="data/images/Phase.png" alt="">
                     </div>
                     <h3 class="modal-title">To Observe, or Not to Observe?\nThat Is the Question...</h3>
                     <div class="choices-container">

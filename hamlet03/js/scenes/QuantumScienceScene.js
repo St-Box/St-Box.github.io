@@ -6,11 +6,11 @@ class QuantumScienceScene extends BaseScene {
                 <div class="concepts-sidebar"></div>
                 <div class="content-area">
                     <div class="content-header">
-                        <h1>量子物理科普</h1>
-                        <p>探索微观世界的奇妙现象</p>
+                        <h1>Scientific Facts</h1>
+                        <p>Some quantum concepts that have appeared in the story.</p>
                     </div>
                     <div class="concept-content">
-                        <h2>选择左侧概念查看详情...</h2>
+                        <h2>Click the cards to view the details...</h2>
                     </div>
                 </div>
 

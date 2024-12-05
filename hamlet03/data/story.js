@@ -331,8 +331,14 @@ choices: [
 
         The equipment flickered again, then stabilized. A new equation appeared on the screen—one never seen before. 
         It was the final piece of his father’s unification theory—a theory that merged quantum mechanics and gravity into one cohesive whole. 
-        The very fabric of spacetime had been rewritten, and it was no longer just theory—it was real.
-    `,
+        The very fabric of spacetime had been rewritten, and it was no longer just theory—it was real.`,
+        media: {
+            type: 'image',
+            file: 'End1.1.png',
+            position: 'float-left',
+            style: 'full',
+            caption: ''
+            },
     choices: [
         { text: "Continue to the next phase", next: 'ending1_1' }
     ]
@@ -392,8 +398,14 @@ choices: [
 
             The screens dimmed, but the world they had revealed was only just beginning. 
             In that moment, Hamlet knew that nothing would ever be the same again. The past no longer mattered. 
-            The future was now to be shaped by them, and it all began with the rise of quantum reality.
-        `,
+            The future was now to be shaped by them, and it all began with the rise of quantum reality.`,
+            media: {
+                type: 'image',
+                file: 'End1.4.png',
+                position: 'float-right',
+                style: 'full',
+                caption: ''
+                },
         choices: [
         ],
         isEnding: true  // 添加结局标记
@@ -408,8 +420,14 @@ choices: [
         (whispering to himself)  
         "This is it, Father. Everything is about to be revealed."
 
-        Suddenly, a blinding light filled the room, and the data streams began to coalesce into the equations his father had left behind. But then, an alarm blared, and the equipment began malfunctioning. The quantum field’s instability intensified.
-    `,
+        Suddenly, a blinding light filled the room, and the data streams began to coalesce into the equations his father had left behind. But then, an alarm blared, and the equipment began malfunctioning. The quantum field’s instability intensified.`,
+        media: {
+            type: 'image',
+            file: 'End2.1.png',
+            position: 'float-left',
+            style: 'full',
+            caption: ''
+            },
     choices: [
         { text: "Continue to the next phase", next: 'ending2_1' }
     ]
@@ -486,8 +504,14 @@ choices: [
 
         What remained was the ceaseless resonance of the quantum wave function, echoing like the heartbeat of the universe. Every moment surrounded by infinite outcomes, each choice, each action suspended in a state of indeterminacy, as though caught within the light cone of an event that has no beginning or end.
 
-        Without an observer, their story cannot be fixed or defined. It exists in superposition, suspended forever between endless possibilities, unable to collapse into a singular result. The truth of this experiment will never manifest unless there is intervention, unless eyes watch this moment—otherwise, it will remain forever in the chaotic flux of quantum superposition, where even the light cones of their potential futures become distorted and infinite.
-    `,
+        Without an observer, their story cannot be fixed or defined. It exists in superposition, suspended forever between endless possibilities, unable to collapse into a singular result. The truth of this experiment will never manifest unless there is intervention, unless eyes watch this moment—otherwise, it will remain forever in the chaotic flux of quantum superposition, where even the light cones of their potential futures become distorted and infinite.`,
+        media: {
+            type: 'image',
+            file: 'End3.1.png',
+            position: 'float-left',
+            style: 'full',
+            caption: ''
+            },
     choices: [
         
     ],
