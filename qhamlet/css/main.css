@@ -1,0 +1,347 @@
+/* 颜色变量定义 */
+:root {
+    /* 主题色板 */
+    --color-primary: #9D00FF;          /* 深紫 */
+    --color-primary-light: #B84DFF;    
+    --color-primary-dark: #7E00CC;     
+    
+    /* 背景色系 */
+    --bg-gradient-start: #000000;      
+    --bg-gradient-end: #0A0A0A;        
+    --bg-container: rgba(10, 10, 10, 0.7);  
+    --bg-overlay: rgba(157, 0, 255, 0.15);   
+    
+    /* 文字颜色 */
+    --text-primary: #ffffff;           
+    --text-secondary: rgba(255, 255, 255, 0.7);  
+    --text-hint: rgba(255, 255, 255, 0.5);       
+    
+    /* 交互元素 */
+    --button-gradient: linear-gradient(45deg, var(--color-primary-dark), var(--color-primary));
+    --button-hover-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+    --container-border: rgba(157, 0, 255, 0.2);
+    
+    /* 特效 */
+    --glow-primary: rgba(157, 0, 255, 0.3);
+    --blur-effect: blur(10px);
+    --transition-speed: 0.3s;
+}
+
+/* 基础样式设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(45deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: var(--text-primary);
+    font-family: 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 容器样式 */
+.quantum-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* 标题样式 */
+.title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+    text-shadow: 0 0 10px var(--glow-primary);
+}
+
+/* 故事容器样式 */
+.story-container {
+    background: var(--bg-container);
+    backdrop-filter: var(--blur-effect);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    border: 1px solid var(--container-border);
+    position: relative;
+    z-index: 1;
+}
+
+/* 量子状态指示器 */
+.quantum-state {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-overlay);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.state-display {
+    width: 100%;
+    text-align: center;
+}
+
+.state-label {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+}
+
+.state-notation {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1em;
+    color: var(--text-primary);
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* 选项容器和按钮 */
+.choice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.choice-btn {
+    background: var(--button-gradient);
+    border: none;
+    color: var(--text-primary);
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--button-hover-shadow);
+}
+
+/* 控制按钮 */
+.control-buttons {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    background: var(--bg-overlay);
+    border: 1px solid var(--container-border);
+    color: var(--text-primary);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.control-btn:hover {
+    background: var(--color-primary);
+    opacity: 0.7;
+}
+
+/* 当前路径显示 */
+.current-path {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-overlay);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    z-index: 1001;
+}
+
+/* 历史面板 */
+.history-panel {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: var(--bg-container);
+    backdrop-filter: var(--blur-effect);
+    border-right: 1px solid var(--container-border);
+    transition: left var(--transition-speed) ease;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.history-panel.active {
+    left: 0;
+}
+
+/* 媒体容器相关样式 */
+.story-media-container {
+    margin: 20px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-speed) ease;
+}
+
+.story-media-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.story-media-container.float-right {
+    float: right;
+    margin: 0 0 20px 20px;
+    width: 40%;
+}
+
+.story-media-container.float-left {
+    float: left;
+    margin: 0 20px 20px 0;
+    width: 40%;
+}
+
+/* 媒体元素样式 */
+.story-image,
+.story-video,
+.story-gif {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--glow-primary);
+}
+
+.media-caption {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-top: 8px;
+}
+
+/* 媒体样式变体 */
+.story-image.style-regular,
+.story-gif.style-regular {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.story-image.style-full,
+.story-gif.style-full {
+    width: 100%;
+    height: auto;
+}
+
+.story-image.style-medium,
+.story-gif.style-medium {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+
+/* 在 main.css 中添加 星星效果 */
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+@keyframes twinkle-2 {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.2; }
+    100% { opacity: 0.5; }
+}
+
+@keyframes twinkle-3 {
+    0% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+    100% { opacity: 0.8; }
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    transform-origin: center;
+}
+
+.star.small {
+    width: 1px;
+    height: 1px;
+}
+
+.star.medium {
+    width: 2px;
+    height: 2px;
+}
+
+.star.large {
+    width: 3px;
+    height: 3px;
+}
+
+.star.twinkle-1 {
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+.star.twinkle-2 {
+    animation: twinkle-2 4s infinite ease-in-out;
+}
+
+.star.twinkle-3 {
+    animation: twinkle-3 5s infinite ease-in-out;
+}
+
+/* 流星效果 */
+
+@keyframes shooting-star {
+    0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(500px) translateY(500px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+    animation: shooting-star 1s linear forwards;
+    pointer-events: none;
+}
+
+/* 为星星添加模糊效果 */
+.star.medium, .star.large {
+    filter: blur(0.5px);
+}
+
+.star.large {
+    box-shadow: 0 0 2px #fff;
+}

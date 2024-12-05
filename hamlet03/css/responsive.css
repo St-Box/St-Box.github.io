@@ -1,0 +1,119 @@
+/* 大屏幕设备 */
+@media (min-width: 1200px) {
+    .quantum-container {
+        max-width: 1000px;
+    }
+
+    .story-text {
+        font-size: 1.2em;
+    }
+}
+
+/* 中等屏幕设备 */
+@media (max-width: 992px) {
+    .quantum-container {
+        max-width: 720px;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+}
+
+/* 小屏幕设备 */
+@media (max-width: 768px) {
+    .quantum-container {
+        padding: 15px;
+    }
+
+    .story-container {
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 1.8em;
+    }
+
+    .quantum-state {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .control-buttons {
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .current-path {
+        font-size: 0.8em;
+    }
+}
+
+/* 超小屏幕设备 */
+@media (max-width: 576px) {
+    .story-container {
+        padding: 15px;
+        margin: 10px 0;
+    }
+
+    .title {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .story-text {
+        font-size: 1em;
+    }
+
+    .choice-btn {
+        padding: 12px 20px;
+        font-size: 0.9em;
+    }
+
+    .history-panel {
+        width: 100%;
+        left: -100%;
+    }
+
+    .control-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+}
+
+/* 横屏模式 */
+@media (orientation: landscape) and (max-height: 500px) {
+    .quantum-state {
+        transform: scale(0.8);
+    }
+
+    .control-buttons {
+        transform: scale(0.8);
+    }
+}
+
+/* 深色主题适配 */
+@media (prefers-color-scheme: dark) {
+    .story-container {
+        background: rgba(13, 12, 40, 0.8);
+    }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+    .choice-btn {
+        border: 2px solid white;
+    }
+}
+
+/* 减少动画 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -1,0 +1,324 @@
+/* 主容器设置 */
+.quantum-science-page {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh; /* 使用视口高度 */
+    box-sizing: border-box; /* 确保padding计入总高度 */
+}
+
+/* 左侧概念栏 */
+.concepts-sidebar {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto; /* 添加垂直滚动 */
+    max-height: calc(100vh - 4rem); /* 减去上下padding */
+    padding-right: 1rem; /* 为滚动条预留空间 */
+}
+
+/* 美化滚动条 */
+.concepts-sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.concepts-sidebar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.concepts-sidebar::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+}
+
+/* 内容区域 */
+.content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-container);
+    border-radius: 20px;
+    padding: 2rem;
+    overflow-y: auto; /* 添加垂直滚动 */
+    max-height: calc(100vh - 4rem); /* 减去上下padding */
+}
+
+/* 内容区域的滚动条样式 */
+.content-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-area::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.content-area::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+}
+
+/* 标题区域固定 */
+.content-header {
+    margin-bottom: 2rem;
+}
+
+/* 概念内容区域 */
+.concept-content {
+    flex: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.concept-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 概念卡片样式 */
+/* quantum-science.css */
+
+/* 概念卡片基础样式 */
+.concept-card {
+    position: relative;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 卡片背景容器 */
+.concept-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.concept-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* 卡片文字遮罩层 */
+.concept-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(
+        transparent,
+        rgba(0, 0, 0, 0.7) 30%,
+        rgba(0, 0, 0, 0.9)
+    );
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+/* 卡片标题 */
+.concept-title {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+/* 卡片简介文字 */
+.concept-brief {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    opacity: 0.8;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* 悬停效果 */
+.concept-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(157, 0, 255, 0.3);
+}
+
+.concept-card:hover .concept-background img {
+    transform: scale(1.1);
+}
+
+.concept-card:hover .concept-overlay {
+    background: linear-gradient(
+        transparent,
+        rgba(157, 0, 255, 0.7) 30%,
+        rgba(0, 0, 0, 0.9)
+    );
+}
+
+.concept-card:hover .concept-title {
+    transform: translateY(-5px);
+}
+
+.concept-card:hover .concept-brief {
+    max-height: 100px;
+    opacity: 1;
+    margin-top: 0.5rem;
+}
+
+/* 激活状态 */
+.concept-card.active {
+    box-shadow: 0 0 20px var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+/* 点击效果 */
+.concept-card:active {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(157, 0, 255, 0.2);
+}
+
+
+
+/* 导航按钮固定在底部 */
+/* 量子科普页面的导航按钮样式 */
+.quantum-nav-buttons {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.quantum-nav-button {
+    background: var(--color-primary-dark);
+    border: none;
+    color: var(--text-primary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantum-nav-button:hover {
+    background: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--glow-primary);
+}
+
+/* 响应式布局 */
+@media (max-width: 1024px) {
+    .quantum-science-page {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .concepts-sidebar {
+        width: 100%;
+        max-height: 300px; /* 在移动设备上限制高度 */
+    }
+
+    .content-area {
+        max-height: calc(100vh - 400px); /* 为顶部概念栏留出空间 */
+    }
+}
+
+/* 概念说明文本样式 */
+.concept-description {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+}
+
+.concept-description p {
+    margin-bottom: 1rem;
+}
+
+/* 概念插图容器 */
+.concept-illustration {
+    width: 100%;
+    margin: 2rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.concept-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+
+
+
+/* ... 其他样式保持不变 ... */
+/* ... 结尾按钮 ... */
+
+/* story-scene.css 或相应的样式文件中 */
+
+.ending-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    transition: all 0.5s ease;
+}
+
+.ending-buttons .choice-btn {
+    min-width: 150px;
+    padding: 12px 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.ending-buttons .choice-btn:nth-child(1) { animation-delay: 0.2s; }
+.ending-buttons .choice-btn:nth-child(2) { animation-delay: 0.4s; }
+.ending-buttons .choice-btn:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.science-btn {
+    background: linear-gradient(45deg, var(--color-primary-dark), var(--color-primary));
+}
+
+.science-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--glow-primary);
+}
+
+/* 结局特殊样式 */
+.story-text.ending {
+    font-size: 1.2rem;
+    line-height: 2;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeIn 1s ease;
+}

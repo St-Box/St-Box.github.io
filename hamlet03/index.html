@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Hamlet</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/character-intro.css">
+    <link rel="stylesheet" href="css/cover-scene.css">
+    <link rel="stylesheet" href="css/story-background.css">
+    <link rel="stylesheet" href="css/stars.css">
+    <link rel="stylesheet" href="css/quantum-science.css">
+
+</head>
+<body>
+    <div id="stars" class="stars"></div>
+    <div id="app"></div>
+
+    <!-- 核心系统 -->
+    <script src="js/SceneManager.js"></script>
+    <script src="js/scenes/BaseScene.js"></script>
+    
+    <!-- 数据 -->
+    <script src="data/story.js"></script>
+    <script src="data/characters.js"></script>
+
+    <!-- 工具类 -->
+    <script src="js/utils.js"></script>
+    
+    <!-- 组件 -->
+    <script src="js/components/QuantumAnimation.js"></script>
+    <script src="js/components/HistoryManager.js"></script>
+    <script src="js/components/StoryManager.js"></script>
+
+    <!-- 场景 -->
+    <script src="js/scenes/CoverScene.js"></script>
+    <script src="js/scenes/StoryBackgroundScene.js"></script>  <!-- 添加这一行 -->
+    <script src="js/scenes/CharacterIntroScene.js"></script>
+    <script src="js/scenes/StoryScene.js"></script>
+    <script src="data/quantum_concepts.js"></script>
+    <script src="js/scenes/QuantumScienceScene.js"></script>
+    
+    <!-- 主程序 -->
+    <script src="js/main.js"></script>
+</body>
+</html>

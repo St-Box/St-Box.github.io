@@ -1,0 +1,393 @@
+/* 颜色变量定义 */
+:root {
+    /* 主题色板 */
+    --color-primary: #9D00FF;          /* 深紫 */
+    --color-primary-light: #B84DFF;    
+    --color-primary-dark: #7E00CC;     
+    
+    /* 背景色系 */
+    --bg-gradient-start: #000000;      
+    --bg-gradient-end: #0A0A0A;        
+    --bg-container: rgba(10, 10, 10, 0.7);  
+    --bg-overlay: rgba(157, 0, 255, 0.15);   
+    
+    /* 文字颜色 */
+    --text-primary: #ffffff;           
+    --text-secondary: rgba(255, 255, 255, 0.7);  
+    --text-hint: rgba(255, 255, 255, 0.5);       
+    
+    /* 交互元素 */
+    --button-gradient: linear-gradient(45deg, var(--color-primary-dark), var(--color-primary));
+    --button-hover-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+    --container-border: rgba(157, 0, 255, 0.2);
+    
+    /* 特效 */
+    --glow-primary: rgba(157, 0, 255, 0.3);
+    --blur-effect: blur(10px);
+    --transition-speed: 0.3s;
+}
+
+/* 基础样式设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(45deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: var(--text-primary);
+    font-family: 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 容器样式 */
+.quantum-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* 标题样式 */
+.title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+    text-shadow: 0 0 10px var(--glow-primary);
+}
+
+/* 故事容器样式 */
+.story-container {
+    background: var(--bg-container);
+    backdrop-filter: var(--blur-effect);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    border: 1px solid var(--container-border);
+    position: relative;
+    z-index: 1;
+}
+
+/* 故事文本样式 */
+.story-text {
+    /* 基础样式 */
+    white-space: pre-line;
+    line-height: 1.8;
+    font-size: 0.95rem !important;;
+    color: var(--text-primary);
+    padding: 20px 30px; /* 调整内边距，左右加大一些 */
+    text-align: left; /* 两端对齐 */
+    letter-spacing: 0.5px;
+    
+    /* 可读性增强 */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    max-width: 100%; /* 确保最大宽度占满容器 */
+    margin: 0; /* 移除外边距，让文本框完全贴合容器 */
+    margin-bottom: 20px;
+    
+    /* 视觉效果 */
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+    min-height: 50px;
+    width: 100%; /* 确保宽度占满 */
+}
+
+/* 移除或修改这个媒体查询，因为我们想要文本占满容器 */
+@media (min-width: 768px) {
+    .story-text {
+        max-width: 100%; /* 改为100% */
+    }
+}
+
+/* 量子状态指示器 */
+.quantum-state {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-overlay);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.state-display {
+    width: 100%;
+    text-align: center;
+}
+
+.state-label {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+}
+
+.state-notation {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1em;
+    color: var(--text-primary);
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* 选项容器和按钮 */
+.choice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.choice-btn {
+    background: var(--button-gradient);
+    border: none;
+    color: var(--text-primary);
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--button-hover-shadow);
+}
+
+/* 控制按钮 */
+.control-buttons {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    background: var(--bg-overlay);
+    border: 1px solid var(--container-border);
+    color: var(--text-primary);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.control-btn:hover {
+    background: var(--color-primary);
+    opacity: 0.7;
+}
+
+/* 当前路径显示，这里先设置成不显示 */
+.current-path {
+    display: none;  /* 添加这一行 */
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-overlay);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    z-index: 1001;
+}
+
+/* 历史面板，暂时先不显示 */
+#toggleHistory {
+    display: none;
+}
+.history-panel {
+    display: none;
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: var(--bg-container);
+    backdrop-filter: var(--blur-effect);
+    border-right: 1px solid var(--container-border);
+    transition: left var(--transition-speed) ease;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.history-panel.active {
+    left: 0;
+}
+
+/* 媒体容器相关样式 */
+.story-media-container {
+    margin: 20px 0;
+    position: relative;
+}
+
+.story-media-container.float-right {
+    float: right;
+    margin: 0 0 20px 20px;
+    width: 40%;
+}
+
+.story-media-container.float-left {
+    float: left;
+    margin: 0 20px 20px 0;
+    width: 40%;
+}
+
+/* 媒体元素样式 */
+.story-image,
+.story-video,
+.story-gif {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--glow-primary);
+}
+
+.media-caption {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-top: 8px;
+}
+
+/* 媒体样式变体 */
+.story-image.style-regular,
+.story-gif.style-regular {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.story-image.style-full,
+.story-gif.style-full {
+    width: 100%;
+    height: auto;
+}
+
+.story-image.style-medium,
+.story-gif.style-medium {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+
+
+
+/* 动画相关类 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn var(--transition-speed) forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+/* 弹窗样式 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.choices-modal {
+    background: var(--bg-container);
+    border: 1px solid var(--container-border);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 0 30px var(--glow-primary);
+}
+
+.modal-image {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-title {
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.choices-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-choice {
+    opacity: 0;
+}
+
+.continue-btn {
+    background: var(--button-gradient);
+    border: none;
+    color: var(--text-primary);
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    margin: 20px auto;
+    display: block;
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--button-hover-shadow);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+

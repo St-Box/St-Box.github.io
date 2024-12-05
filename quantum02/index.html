@@ -7,50 +7,37 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/character-intro.css">
+    <link rel="stylesheet" href="css/cover-scene.css">
+    <link rel="stylesheet" href="css/story-background.css">
 </head>
 <body>
     <div id="stars" class="stars"></div>
+    <div id="app"></div>
 
-    <div class="history-panel" id="historyPanel">
-        <h3>故事记录</h3>
-        <div id="historyContent"></div>
-    </div>
-
-    <div class="control-buttons">
-        <button class="control-btn" id="resetBtn">Reset</button>
-        <button class="control-btn" id="toggleHistory">View History</button>
-    </div>
-
-    <div class="current-path" id="currentPath">Current Path: 初始</div>
-
-    <div class="quantum-container">
-        <h1 class="title">Quantum Hamlet</h1>
-        
-        <div class="quantum-state">
-            <div class="state-display">
-                <div class="state-label">Quantum State：</div>
-                <div id="currentState" class="state-notation">|Ψ₀⟩</div>
-            </div>
-            <div id="quantumAnimation"></div>
-            <!-- 量子动画将在此处生成 -->
-        </div>
-
-        <div class="story-container">
-            <div class="story-text" id="storyText">
-                <!-- 故事内容将在此处动态生成 -->
-            </div>
-            <div class="choice-container" id="choices">
-                <!-- 选项将在此处动态生成 -->
-            </div>
-        </div>
-    </div>
-
-    <!-- 按照依赖顺序加载脚本 -->
+    <!-- 核心系统 -->
+    <script src="js/SceneManager.js"></script>
+    <script src="js/scenes/BaseScene.js"></script>
+    
+    <!-- 数据 -->
     <script src="data/story.js"></script>
+    <script src="data/characters.js"></script>
+
+    <!-- 工具类 -->
     <script src="js/utils.js"></script>
-    <script src="js/QuantumAnimation.js"></script>
-    <script src="js/HistoryManager.js"></script>
-    <script src="js/StoryManager.js"></script>
+    
+    <!-- 组件 -->
+    <script src="js/components/QuantumAnimation.js"></script>
+    <script src="js/components/HistoryManager.js"></script>
+    <script src="js/components/StoryManager.js"></script>
+
+    <!-- 场景 -->
+    <script src="js/scenes/CoverScene.js"></script>
+    <script src="js/scenes/StoryBackgroundScene.js"></script>  <!-- 添加这一行 -->
+    <script src="js/scenes/CharacterIntroScene.js"></script>
+    <script src="js/scenes/StoryScene.js"></script>
+    
+    <!-- 主程序 -->
     <script src="js/main.js"></script>
 </body>
 </html>
