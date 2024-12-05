@@ -45,8 +45,8 @@ const QUANTUM_CONCEPTS = {
     debate: {
         id: 'debate',
         title: 'Classical Physics vs. Quantum Physics',
-        image: 'data/images/concepts/debate01.jpg',
-        detailImage: 'data/images/concepts/debate01.jpg',
+        image: 'data/images/concepts/debate02.jpg',
+        detailImage: 'data/images/concepts/debate02.jpg',
         description: `
             <p>Scientific Background: Classical physics (e.g., Newtonian mechanics and general relativity) assumes that the behavior of the universe is deterministic and predictable, with the state of the universe calculable from initial conditions. In contrast, quantum physics reveals randomness and uncertainty in the microscopic world. The phenomena of quantum superposition, entanglement, and the measurement problem highlight the fundamental differences between quantum mechanics and classical physics. To date, no theory has successfully unified quantum mechanics and general relativity (i.e., gravity), though quantum gravity theories aim to resolve this conflict, but they remain in an exploratory phase.</p>
             
